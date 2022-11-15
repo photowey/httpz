@@ -1,0 +1,44 @@
+<idea-plugin>
+    <id>com.photowey.plugin.httpz</id>
+    <name>httpz</name>
+    <vendor email="photowey@github.com" url="https://www.github.com/photowey">
+        photowey
+    </vendor>
+
+    <description>
+        <![CDATA[
+            <h1>httpz<h1><br>
+            <p>This is a http client plugin, the plugin is based on Okhttp3 API and provides the ability to http client in IDE<p><br>
+        ]]>
+    </description>
+
+    <!-- please see https://plugins.jetbrains.com/docs/intellij/plugin-compatibility.html
+         on how to target different products -->
+    <depends>com.intellij.modules.platform</depends>
+    <depends>com.intellij.modules.java</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+
+        <fileType
+                name="HTTPZ"
+                implementationClass="com.photowey.plugin.httpz.lang.HttpzFileType"
+                fieldName="INSTANCE"
+                language="HTTPZ"
+                extensions="httpz"/>
+
+        <toolWindow
+                factoryClass="com.photowey.plugin.httpz.tool.ConsoleOutputToolWindow"
+                id="Httpz" anchor="bottom"
+                icon="com.photowey.plugin.httpz.icon.HttpzIcons.ICON"/>
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+        <action class="com.photowey.plugin.httpz.action.ConsoleAction"
+                text="Httpz"
+                icon="com.photowey.plugin.httpz.icon.HttpzIcons.ICON">
+            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
+        </action>
+    </actions>
+</idea-plugin>
