@@ -15,7 +15,6 @@
  */
 package com.photowey.plugin.httpz.action;
 
-import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.actionSystem.AnAction;
 import com.intellij.openapi.actionSystem.AnActionEvent;
 import com.photowey.plugin.httpz.tool.ConsoleOutputToolWindow;
@@ -30,8 +29,8 @@ import org.jetbrains.annotations.NotNull;
  */
 public class ConsoleAction extends AnAction {
 
-    private void testNotify(AnActionEvent e) {
-        ConsoleOutputToolWindow.getConsoleView(e.getProject()).print("test output in console", ConsoleViewContentType.NORMAL_OUTPUT);
+    private void testNotify(AnActionEvent event) {
+        ConsoleOutputToolWindow.show(event.getProject(), "test output in console");
     }
 
     @Override

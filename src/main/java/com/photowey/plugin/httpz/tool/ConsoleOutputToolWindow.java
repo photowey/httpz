@@ -17,13 +17,17 @@ package com.photowey.plugin.httpz.tool;
 
 import com.intellij.execution.filters.TextConsoleBuilderFactory;
 import com.intellij.execution.ui.ConsoleView;
+import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.wm.ToolWindow;
 import com.intellij.openapi.wm.ToolWindowFactory;
 import com.intellij.openapi.wm.ToolWindowManager;
 import com.intellij.ui.content.Content;
+import com.intellij.ui.content.ContentManager;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
+import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,9 +41,7 @@ import java.util.Map;
 public class ConsoleOutputToolWindow implements ToolWindowFactory {
 
     private static final Map<Project, ConsoleView> CONSOLE_VIEWS = new HashMap<>();
-
     public static ToolWindow toolWindow;
-
     public static final String HTTPZ_CONSOLE_ID = "Httpz";
     public static final String HTTPZ_WINDOW = "👇Output👇";
 
@@ -57,17 +59,61 @@ public class ConsoleOutputToolWindow implements ToolWindowFactory {
             ToolWindow toolWindow = getToolWindow(project);
             createToolWindow(project, toolWindow);
         }
+
         return CONSOLE_VIEWS.get(project);
     }
 
+    public static void show(Project project, String content) {
+        show(project, "", content);
+    }
+
+    public static void show(Project project, String url, String content) {
+        show(project, url, content, ConsoleViewContentType.NORMAL_OUTPUT);
+    }
+
+    public static void show(Project project, String url, String content, ConsoleViewContentType contentType) {
+        // @formatter:off
+        if (StringUtils.isEmpty(content)) {
+            return;
+        }
+        ConsoleView cv = getConsoleView(project);
+        StringBuilder output = new StringBuilder();
+        output.append("----------------------------------------------------------------");
+        output.append("\n");
+        if (StringUtils.isNotBlank(url)) {
+            output.append(url);
+            output.append("\n");
+            output.append("----------------");
+            output.append("\n");
+        }
+        output.append("Output:");
+        output.append("\n");
+        output.append("-------");
+        output.append("\n");
+        output.append(content);
+        output.append("\n");
+
+        cv.print(output.toString(), contentType);
+        // @formatter:on
+    }
+
     private static void createToolWindow(Project project, ToolWindow toolWindow) {
+        // @formatter:off
         ConsoleView consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).getConsole();
         CONSOLE_VIEWS.put(project, consoleView);
-        Content content = toolWindow.getContentManager().getFactory().createContent(consoleView.getComponent(), HTTPZ_WINDOW, false);
-        //toolWindow.getContentManager().addContent(content);
-        content.getComponent().setVisible(true);
+        Content content = toolWindow
+                .getContentManager()
+                .getFactory()
+                .createContent(consoleView.getComponent(), HTTPZ_WINDOW, false);
         content.setCloseable(true);
-        toolWindow.getContentManager().addContent(content);
+
+        JComponent component = content.getComponent();
+        component.setVisible(true);
+
+        ContentManager contentManager = toolWindow.getContentManager();
+        contentManager.addContent(content);
+        contentManager.setSelectedContent(content);
+        // @formatter:on
     }
 
     public static ToolWindow getToolWindow(@NotNull Project project) {

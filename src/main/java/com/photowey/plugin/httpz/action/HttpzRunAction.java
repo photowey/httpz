@@ -15,11 +15,6 @@
  */
 package com.photowey.plugin.httpz.action;
 
-import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONArray;
-import com.alibaba.fastjson2.JSONObject;
-import com.alibaba.fastjson2.JSONWriter;
-import com.intellij.execution.ui.ConsoleViewContentType;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
@@ -34,16 +29,13 @@ import com.intellij.psi.PsiElement;
 import com.photowey.plugin.httpz.App;
 import com.photowey.plugin.httpz.ast.HttpzAst;
 import com.photowey.plugin.httpz.config.HttpzPluginConfigure;
+import com.photowey.plugin.httpz.formatter.Formatter;
 import com.photowey.plugin.httpz.okhttp.context.RequestContext;
 import com.photowey.plugin.httpz.okhttp.executor.RequestExecutor;
 import com.photowey.plugin.httpz.tool.ConsoleOutputToolWindow;
 import okhttp3.Response;
 import org.jetbrains.annotations.NotNull;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
 import java.util.Objects;
 
 /**
@@ -87,7 +79,7 @@ public class HttpzRunAction extends AnAction {
             String output = this.parseResponse(response);
 
             //this.doNotify("Print", "Run result", output, NotificationType.INFORMATION);
-            ConsoleOutputToolWindow.getConsoleView(event.getProject()).print(output, ConsoleViewContentType.NORMAL_OUTPUT);
+            ConsoleOutputToolWindow.show(event.getProject(), cmd, output);
         }
     }
 
@@ -107,31 +99,11 @@ public class HttpzRunAction extends AnAction {
         return this.tryFormatIfNecessary(output.toString());
     }
 
-    @NotNull
-    private String readOutput(InputStream input) throws IOException {
-        InputStreamReader isr = new InputStreamReader(input);
-        LineNumberReader reader = new LineNumberReader(isr);
-        StringBuilder output = new StringBuilder();
-        String line;
-        while ((line = reader.readLine()) != null) {
-            output.append(line).append("\n");
-        }
-
-        return this.tryFormatIfNecessary(output.toString());
-    }
-
     private String tryFormatIfNecessary(String data) {
-        if (JSON.isValid(data)) {
-            JSONObject body = JSON.parseObject(data, JSONObject.class);
-            return JSON.toJSONString(body, JSONWriter.Feature.PrettyFormat);
-        } else if (JSON.isValidArray(data)) {
-            JSONArray body = JSON.parseObject(data, JSONArray.class);
-            return JSON.toJSONString(body, JSONWriter.Feature.PrettyFormat);
-        }
-
-        return data;
+        return Formatter.tryFormat(data);
     }
 
+    // @formatter:off
     private void doNotify(
             @NotNull String groupId,
             @NotNull @NlsContexts.NotificationTitle String title,
@@ -139,4 +111,5 @@ public class HttpzRunAction extends AnAction {
             @NotNull NotificationType type) {
         Notifications.Bus.notify(new Notification(groupId, title, content, type));
     }
+    // @formatter:on
 }

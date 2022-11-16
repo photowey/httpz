@@ -1,7 +1,7 @@
 plugins {
     id "com.github.hierynomus.license" version "0.16.1"
     id 'org.jetbrains.intellij' version '1.9.0'
-    id 'java-library'
+    id 'java'
 }
 
 ext {
@@ -33,7 +33,7 @@ intellij {
 
 patchPluginXml {
     changeNotes = """
-      <em>New feature: execute http request by httpz</em>
+      <em>New feature: provides the ability to write httpz commands and make HTTP requests in IDE</em>
     """
 }
 
@@ -49,10 +49,7 @@ license {
 
 // ----------------------------------------------------------------
 
-sourceCompatibility = 11
-targetCompatibility(JavaVersion.VERSION_11)
-
-compileJava.options.encoding = "UTF-8"
+// compileJava.options.encoding = "UTF-8"
 compileTestJava.options.encoding("UTF-8")
 
 tasks.withType(JavaCompile) {
@@ -62,13 +59,6 @@ tasks.withType(JavaCompile) {
 // javadoc.options.encoding = "UTF-8"
 tasks.withType(Javadoc) {
     options.encoding("UTF-8")
-}
-
-// ----------------------------------------------------------------
-
-java {
-    withJavadocJar()
-    withSourcesJar()
 }
 
 // ----------------------------------------------------------------
