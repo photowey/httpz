@@ -8,7 +8,7 @@
     <description>
         <![CDATA[
             <h1>httpz<h1><br>
-            <p>This is an http client plugin that is based on the Okhttp3 API and provides the ability to write CURL commands and make HTTP requests in the IDE<p><br>
+            <p>This is an http client plugin that is based on the Okhttp3 API and provides the ability to write HTTPZ(~CURL) commands and make HTTP requests in the IDE<p><br>
         ]]>
     </description>
 
