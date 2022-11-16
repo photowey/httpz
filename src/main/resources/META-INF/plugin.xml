@@ -1,6 +1,6 @@
 <idea-plugin>
     <id>com.photowey.plugin.httpz</id>
-    <name>httpz</name>
+    <name>Httpz</name>
     <vendor email="photowey@github.com" url="https://www.github.com/photowey">
         photowey
     </vendor>
