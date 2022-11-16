@@ -1,7 +1,7 @@
 plugins {
     id "com.github.hierynomus.license" version "0.16.1"
     id 'org.jetbrains.intellij' version '1.9.0'
-    id 'java'
+    id 'java-library'
 }
 
 ext {
@@ -9,15 +9,12 @@ ext {
     author = "photowey(photowey@gmail.com)"
 }
 
-group 'com.phoyowey'
+group 'com.photowey'
 version '1.0.0-SNAPSHOT'
-
-sourceCompatibility = 11
 
 repositories {
     mavenLocal()
     maven { url 'https://maven.aliyun.com/repository/public' }
-    maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
     mavenCentral()
 }
 
@@ -36,8 +33,7 @@ intellij {
 
 patchPluginXml {
     changeNotes = """
-      v1.0.0<br>
-      <em>1.release plugin</em>
+      <em>New feature: execute http request by httpz</em>
     """
 }
 
@@ -50,6 +46,32 @@ license {
     excludes(["**/*.png", "**/*.svg", "**/*.xml", "**/*.gradle", "**/*.md", "**/gradlew.bat", "**/gradlew", "**/package-info.java"])
     strictCheck true
 }
+
+// ----------------------------------------------------------------
+
+sourceCompatibility = 11
+targetCompatibility(JavaVersion.VERSION_11)
+
+compileJava.options.encoding = "UTF-8"
+compileTestJava.options.encoding("UTF-8")
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+// javadoc.options.encoding = "UTF-8"
+tasks.withType(Javadoc) {
+    options.encoding("UTF-8")
+}
+
+// ----------------------------------------------------------------
+
+java {
+    withJavadocJar()
+    withSourcesJar()
+}
+
+// ----------------------------------------------------------------
 
 test {
     useJUnitPlatform()
