@@ -136,28 +136,32 @@ httpbinget:
 ----------------------------------------------------------------
 HTTPZ POST -H "Content-Type: application/json" -H "Accept: */*" -d "{\"hello\":\"world\"}" https://httpbin.org/post
 -------
-Output: -------
+Output:
+-------
 {
-"args": {
-},
-"headers": {
-"Accept": "*/*",
-"Content-Length": "17",
-"Content-Type": "application/json",
-"Host": "httpbin.org",
-"User-Agent": "httpz/1.0.0",
-"X-Amzn-Trace-Id": "Root=xxx"
-},
-"data":"{\"hello\":\"world\"}",
-"form": {
-},
-"origin": "x.x.x.x",
-"files": {
-},
-"json": {
-"hello": "world"
-},
-"url": "https://httpbin.org/post"
+	"args":{
+		
+	},
+	"headers":{
+		"Accept":"*/*",
+		"Content-Length":"17",
+		"Content-Type":"application/json",
+		"Host":"httpbin.org",
+		"User-Agent":"httpz/1.0.0",
+		"X-Amzn-Trace-Id":"Root=xxx"
+	},
+	"data":"{\"hello\":\"world\"}",
+	"form":{
+		
+	},
+	"origin":"x.x.x.x",
+	"files":{
+		
+	},
+	"json":{
+		"hello":"world"
+	},
+	"url":"https://httpbin.org/post"
 }
 ```
 
