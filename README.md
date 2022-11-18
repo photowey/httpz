@@ -44,7 +44,15 @@ https://www.iconfont.cn/search/index?searchType=icon&q=http
 
 - "`--profile, -p`"
 - "`--config, -c`"
-  - "`--file, -f`"
+  - load base `config` variable
+    - `USER_NAME`
+    - `PASSWORD`
+    - `XX_ENABLED`
+    - `...`
+- "`--file, -f`"
+  - load request file( `yml` )
+- "--output, -o"
+  - "`TODO support?`"
 
 ### 3.2.`Expect:`
 
