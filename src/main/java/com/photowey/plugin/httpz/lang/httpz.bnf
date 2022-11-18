@@ -1,0 +1,50 @@
+{
+  parserClass="com.photowey.plugin.httpz.lang.parser.HttpzParser"
+
+  extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+  psiClassPrefix="Httpz"
+  psiImplClassSuffix="Impl"
+  psiPackage="com.photowey.plugin.httpz.lang.psi"
+  psiImplPackage="com.photowey.plugin.httpz.lang.psi.impl"
+
+  elementTypeHolderClass="com.photowey.plugin.httpz.lang.HttpzTypes"
+
+  elementTypeClass="com.photowey.plugin.httpz.lang.element.HttpzElementType"
+  tokenTypeClass="com.photowey.plugin.httpz.lang.HttpzTokenType"
+
+  tokens = [
+        WHITE_SPACE = 'regexp:\s+'
+        URL = 'regexp:(https?)://[-A-Za-z0-9+&@#/%?=~_|!:,.;]+[-A-Za-z0-9+&@#/%=~_|]'
+        QUOTED_STRING = "regexp:('([^'\\]|\\.)*'|\"([^\"\\]|\\.)*\")"
+        BASIC_STRING = "regexp:[0-9a-zA_Z]*"
+        COMMENT = 'regexp://.*|/\*\*.*\*/'
+        OPTION = 'regexp:--header|-H|--data|-d|--query|-q|--user-agent|-A|--env|-e|--profile|-p|--config|-c|--file|-f'
+        METHOD = 'regexp:GET|POST|PUT|PATCH|DELETE'
+        NEWLINE = "regexp:([ \\]*\\)"
+  ]
+}
+
+HttpzFile ::= COMMAND*
+COMMAND ::= HTTPZ METHOD [NEWLINE?] [OPTIONS*] URL
+OPTIONS ::= Option1Statement | Option2Statement | Option3Statement | Option4Statement | Option5Statement | Option6Statement | Option7Statement | Option8Statement | Option9Statement
+Option1Statement ::= OPTION1 QUOTED_STRING [NEWLINE?]
+OPTION1 ::= '-H'|'--header'
+Option2Statement ::= OPTION2 QUOTED_STRING [NEWLINE?]
+OPTION2 ::= '-d'|'--data'
+Option3Statement ::= OPTION3 QUOTED_STRING [NEWLINE?]
+OPTION3 ::= '-q'|'--query'
+Option4Statement ::= OPTION4 QUOTED_STRING [NEWLINE?]
+OPTION4 ::= '-A'|'--user-agent'
+Option5Statement ::= OPTION5 QUOTED_STRING [NEWLINE?]
+OPTION5 ::= '-e'|'--env'
+Option6Statement ::= OPTION6 [NEWLINE?]
+OPTION6 ::= '-p' | '--profile'
+Option7Statement ::= OPTION7 [NEWLINE?]
+OPTION7 ::= '-c' | '--config'
+Option8Statement ::= OPTION8 [NEWLINE?]
+OPTION8 ::= '-f' | '--file'
+Option9Statement ::= OPTION9 QUOTED_STRING [NEWLINE?]
+OPTION9 ::= '-o'|'--output'
+
+KV ::= BASIC_STRING':'BASIC_STRING

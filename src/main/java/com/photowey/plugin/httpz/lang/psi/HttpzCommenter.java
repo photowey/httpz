@@ -13,50 +13,47 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.photowey.plugin.httpz.lang;
+package com.photowey.plugin.httpz.lang.psi;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.photowey.plugin.httpz.icon.HttpzIcons;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.Commenter;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-
 /**
- * {@code HttpzFileType}
+ * {@code HttpzCommenter}
  *
  * @author photowey
- * @date 2022/11/15
+ * @date 2022/11/18
  * @since 1.0.0
  */
-public class HttpzFileType extends LanguageFileType {
-    public static final HttpzFileType INSTANCE = new HttpzFileType();
-
-    public HttpzFileType() {
-        super(HttpzLanguage.INSTANCE);
-    }
+public class HttpzCommenter implements Commenter {
 
     @Override
-    public @NotNull
-    String getName() {
-        return "HTTPZ";
-    }
-
-    @Override
-    public @NotNull
-    String getDescription() {
-        return "Http client HTTPZ language file";
-    }
-
-    @Override
-    public @NotNull
-    String getDefaultExtension() {
-        return "httpz";
+    public @Nullable
+    String getLineCommentPrefix() {
+        return "//";
     }
 
     @Override
     public @Nullable
-    Icon getIcon() {
-        return HttpzIcons.ICON;
+    String getBlockCommentPrefix() {
+        return "/**";
+    }
+
+    @Override
+    public @Nullable
+    String getBlockCommentSuffix() {
+        return "*/";
+    }
+
+    @Override
+    public @Nullable
+    String getCommentedBlockCommentPrefix() {
+        return "/**";
+    }
+
+    @Override
+    public @Nullable
+    String getCommentedBlockCommentSuffix() {
+        return "*/";
     }
 }

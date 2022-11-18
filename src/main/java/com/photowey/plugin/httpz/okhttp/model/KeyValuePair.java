@@ -13,15 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.photowey.plugin.httpz.ast;
+package com.photowey.plugin.httpz.okhttp.model;
+
+import java.io.Serializable;
 
 /**
- * {@code HttpzAst}
+ * {@code KeyValuePair}
  *
  * @author photowey
- * @date 2022/11/15
+ * @date 2022/11/17
  * @since 1.0.0
  */
-public class HttpzAst {
+public class KeyValuePair implements Serializable {
 
+    private static final long serialVersionUID = 5561762443527496438L;
+
+    private String key;
+    private String value;
+
+    public KeyValuePair(String key, String value) {
+        this.key = key;
+        this.value = value;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
 }

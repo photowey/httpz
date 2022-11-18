@@ -1,13 +1,17 @@
 plugins {
-    id "com.github.hierynomus.license" version "0.16.1"
-    id 'org.jetbrains.intellij' version '1.9.0'
     id 'java'
+    id 'org.jetbrains.intellij' version '1.10.0'
+    id "com.github.hierynomus.license" version "0.16.1"
 }
+
+// ----------------------------------------------------------------
 
 ext {
     year = 2022
     author = "photowey(photowey@gmail.com)"
 }
+
+// ----------------------------------------------------------------
 
 group 'com.photowey'
 version '1.0.0-SNAPSHOT'
@@ -20,9 +24,25 @@ repositories {
 
 dependencies {
     implementation 'com.squareup.okhttp3:okhttp:3.14.9'
-    implementation 'com.alibaba.fastjson2:fastjson2:2.0.18'
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+    implementation 'com.alibaba.fastjson2:fastjson2:2.0.19'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+}
+
+// ----------------------------------------------------------------
+
+// Include the generated files in the source set
+sourceSets {
+    main {
+        java {
+            srcDirs("src/main/gen")
+        }
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
 }
 
 // See https://github.com/JetBrains/gradle-intellij-plugin/
@@ -31,19 +51,25 @@ intellij {
     plugins = ['com.intellij.java']
 }
 
+// ----------------------------------------------------------------
+
 patchPluginXml {
-    changeNotes = """
-      <em>New feature: provides the ability to write httpz commands and make HTTP requests in IDE</em>
-    """
+    changeNotes.set("""
+<em>New feature: provides the ability to write httpz commands and make HTTP requests in IDE</em>
+""")
+    version = "${project.version}"
+    sinceBuild.set("213")
+    untilBuild.set("222.*")
 }
 
-tasks.withType(JavaCompile) {
-    options.encoding = "UTF-8"
-}
+// ----------------------------------------------------------------
 
 license {
     header rootProject.file('codequality/HEADER')
-    excludes(["**/*.png", "**/*.svg", "**/*.xml", "**/*.gradle", "**/*.md", "**/gradlew.bat", "**/gradlew", "**/package-info.java"])
+    excludes([
+            "**/*.png", "**/*.svg", "**/*.xml", "**/*.gradle", "**/*.md",
+            "**/gradlew.bat", "**/gradlew", "**/package-info.java", "**/gen/**/*.java"
+    ])
     strictCheck true
 }
 
@@ -66,3 +92,21 @@ tasks.withType(Javadoc) {
 test {
     useJUnitPlatform()
 }
+
+// ----------------------------------------------------------------
+
+task cleanDist(type: Delete) {
+    group("build")
+
+    delete("dist")
+}
+
+// ----------------------------------------------------------------
+
+buildPlugin {
+    buildSearchableOptions {
+        enabled = false
+    }
+}
+
+// ----------------------------------------------------------------

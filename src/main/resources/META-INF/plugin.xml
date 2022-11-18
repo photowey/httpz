@@ -29,16 +29,41 @@
 
         <toolWindow
                 factoryClass="com.photowey.plugin.httpz.tool.ConsoleOutputToolWindow"
-                id="Httpz" anchor="bottom"
+                id="Httpz"
+                anchor="bottom"
                 icon="com.photowey.plugin.httpz.icon.HttpzIcons.ICON"/>
+
+        <lang.parserDefinition
+                language="HTTPZ"
+                implementationClass="com.photowey.plugin.httpz.lang.HttpzParserDefinition"/>
+
+        <lang.syntaxHighlighterFactory language="HTTPZ"
+                                       implementationClass="com.photowey.plugin.httpz.lang.psi.HttpzSyntaxHighlighterFactory"/>
+
+        <codeInsight.lineMarkerProvider language="HTTPZ"
+                                        implementationClass="com.photowey.plugin.httpz.lang.psi.HttpzRelatedItemLineMarkerProvider"/>
+
+        <codeInsight.lineMarkerProvider language="HTTPZ"
+                                        implementationClass="com.photowey.plugin.httpz.lang.psi.HttpzLineMarkerProvider"/>
+
+        <completion.contributor
+                language="HTTPZ"
+                implementationClass="com.photowey.plugin.httpz.lang.psi.HttpzCommandCodeContributor"/>
+
+        <lang.documentationProvider
+                language="HTTPZ"
+                implementationClass="com.photowey.plugin.httpz.lang.psi.HttpzCommandDocumentProvider"/>
+
+        <lang.commenter
+                language="HTTPZ"
+                implementationClass="com.photowey.plugin.httpz.lang.psi.HttpzCommenter"/>
+
+        <lang.formatter
+                language="HTTPZ"
+                implementationClass="com.photowey.plugin.httpz.lang.psi.HttpzCommandFormattingModelBuilder"/>
     </extensions>
 
     <actions>
         <!-- Add your actions here -->
-        <action class="com.photowey.plugin.httpz.action.ConsoleAction"
-                text="Httpz"
-                icon="com.photowey.plugin.httpz.icon.HttpzIcons.ICON">
-            <add-to-group group-id="EditorPopupMenu" anchor="first"/>
-        </action>
     </actions>
 </idea-plugin>

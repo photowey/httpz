@@ -13,15 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.photowey.plugin.httpz.ast;
+package com.photowey.plugin.httpz.lang;
+
+import com.intellij.psi.tree.IElementType;
 
 /**
- * {@code HttpzAst}
+ * {@code HttpzTokenType}
  *
  * @author photowey
- * @date 2022/11/15
+ * @date 2022/11/18
  * @since 1.0.0
  */
-public class HttpzAst {
+public class HttpzTokenType extends IElementType {
 
+    public HttpzTokenType(String element) {
+        super(element, HttpzLanguage.INSTANCE);
+    }
+
+    @Override
+    public String toString() {
+        return "HttpzTokenType." + super.toString();
+    }
 }

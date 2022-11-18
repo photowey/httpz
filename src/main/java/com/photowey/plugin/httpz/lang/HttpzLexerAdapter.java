@@ -13,15 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.photowey.plugin.httpz.ast;
+package com.photowey.plugin.httpz.lang;
+
+import com.intellij.lexer.FlexAdapter;
 
 /**
- * {@code HttpzAst}
+ * {@code HttpzLexerAdapter}
  *
  * @author photowey
- * @date 2022/11/15
+ * @date 2022/11/18
  * @since 1.0.0
  */
-public class HttpzAst {
+public class HttpzLexerAdapter extends FlexAdapter {
 
+    public HttpzLexerAdapter() {
+        super(new _HttpzLexer(null));
+    }
 }

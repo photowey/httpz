@@ -13,50 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.photowey.plugin.httpz.lang;
+package com.photowey.plugin.httpz.lang.psi;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.photowey.plugin.httpz.icon.HttpzIcons;
+import com.intellij.openapi.fileTypes.SyntaxHighlighter;
+import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-import javax.swing.*;
-
 /**
- * {@code HttpzFileType}
+ * {@code HttpzSyntaxHighlighterFactory}
  *
  * @author photowey
- * @date 2022/11/15
+ * @date 2022/11/18
  * @since 1.0.0
  */
-public class HttpzFileType extends LanguageFileType {
-    public static final HttpzFileType INSTANCE = new HttpzFileType();
-
-    public HttpzFileType() {
-        super(HttpzLanguage.INSTANCE);
-    }
+public class HttpzSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
 
     @Override
     public @NotNull
-    String getName() {
-        return "HTTPZ";
-    }
-
-    @Override
-    public @NotNull
-    String getDescription() {
-        return "Http client HTTPZ language file";
-    }
-
-    @Override
-    public @NotNull
-    String getDefaultExtension() {
-        return "httpz";
-    }
-
-    @Override
-    public @Nullable
-    Icon getIcon() {
-        return HttpzIcons.ICON;
+    SyntaxHighlighter getSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
+        return new HttpzSyntaxHighlighter();
     }
 }
