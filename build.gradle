@@ -78,8 +78,9 @@ patchPluginXml {
 license {
     header rootProject.file('codequality/HEADER')
     excludes([
-            "**/*.png", "**/*.svg", "**/*.xml", "**/*.gradle", "**/*.md",
-            "**/gradlew.bat", "**/gradlew", "**/package-info.java", "**/gen/**/*.java"
+            "**/*.png", "**/*.svg", "**/*.xml", "**/*.yml", "**/*.yaml", "**/*.txt", "**/*.gradle", "**/*.md",
+            "**/gradlew.bat", "**/gradlew", "**/package-info.java", "**/gen/**/*.java",
+            "**/ibatis/**/*.java"
     ])
     strictCheck true
 }
