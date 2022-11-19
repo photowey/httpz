@@ -586,7 +586,7 @@ public class OkhttpRequestExecutorImpl implements OkhttpRequestExecutor {
         try (Response response = this.executeRequest(okHttpClient, request)) {
             return this.populateResponseString(response);
         } catch (Exception e) {
-            throw new RuntimeException("Request fail", e);
+            throw new RuntimeException("ConfigMap fail", e);
         }
     }
 
@@ -600,7 +600,7 @@ public class OkhttpRequestExecutorImpl implements OkhttpRequestExecutor {
             return result;
         }
 
-        throw new RuntimeException("Request fail");
+        throw new RuntimeException("ConfigMap fail");
     }
 
     // ---------------------------------------------------------- HEADERS

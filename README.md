@@ -87,6 +87,8 @@ HTTPZ -p httpbinpost -c conf/httpz.yml > httpbinpost.json
 
 > `httpz.yml`
 
+##### 3.2.2.1.`v1`
+
 ```yml
 ---
 httpbinpost:
@@ -111,6 +113,57 @@ httpbinget:
     content-type: "application/json"
     accept: "*/*"
 ```
+
+
+
+##### 3.2.2.2.`v2`
+
+> `httpz-ctx.yml`
+
+```yml
+httpz:
+  context:
+    "PASSWORD": "It's a secret"
+```
+
+
+
+> `httpz.yml`
+
+```yml
+httpz:
+  context:
+    "USERNAME": "photowey"
+  request:
+    - profile: "httpbinpost"
+      env: "dev"
+      url: "https://httpbin.org/post"
+      method: "POST"
+      parameters:
+        hello: "world"
+      headers:
+        content-type: "application/json"
+        accept: "*/*"
+      body:
+        username: "${USERNAME}"
+        password: "${PASSWORD}"
+        addr:
+          country: "cn"
+          province: "cq"
+    - profile: "httpbinget"
+      env: "dev"
+      url: "https://httpbin.org/get"
+      method: "GET"
+      parameters:
+        hello: "world"
+      headers:
+        content-type: "application/json"
+        accept: "*/*"
+```
+
+
+
+
 
 ### 3.3.`Recommend`
 

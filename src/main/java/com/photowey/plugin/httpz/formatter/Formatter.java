@@ -40,7 +40,7 @@ import java.io.Writer;
 public final class Formatter {
 
     private Formatter() {
-        // util class; can't create
+        // utility class; can't create
         throw new AssertionError("No " + this.getClass().getName() + " instances for you!");
     }
 

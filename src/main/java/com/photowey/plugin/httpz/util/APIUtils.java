@@ -35,7 +35,7 @@ public final class APIUtils {
     private static final String ATTR_VALUE = "value";
 
     private APIUtils() {
-        // util class; can't create
+        // utility class; can't create
         throw new AssertionError("No " + this.getClass().getName() + " instances for you!");
     }
 

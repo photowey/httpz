@@ -13,25 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.photowey.plugin.httpz.okhttp.model;
+package com.photowey.plugin.httpz.ast;
 
 import java.io.Serializable;
 
 /**
- * {@code KeyValuePair}
+ * {@code Parameter}
  *
  * @author photowey
  * @date 2022/11/17
  * @since 1.0.0
  */
-public class KeyValuePair implements Serializable {
+public class Parameter implements Serializable {
 
     private static final long serialVersionUID = 5561762443527496438L;
 
     private String key;
     private String value;
 
-    public KeyValuePair(String key, String value) {
+    public Parameter(String key, String value) {
         this.key = key;
         this.value = value;
     }

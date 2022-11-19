@@ -51,30 +51,31 @@ public class HttpzConstants {
 
     public static String PathVariable = "org.springframework.web.bind.annotation.PathVariable";
 
-    public static Set<String> basicType = new HashSet<>();
+    public static Set<String> BasicType = new HashSet<>();
     public static Set<String> RequestMappings = new HashSet<>();
+    public static Set<String> RequestMethods = new HashSet<>();
 
     static {
-        basicType.add("int");
-        basicType.add("boolean");
-        basicType.add("byte");
-        basicType.add("short");
-        basicType.add("long");
-        basicType.add("float");
-        basicType.add("double");
-        basicType.add("char");
-        basicType.add("Boolean");
-        basicType.add("Byte");
-        basicType.add("Short");
-        basicType.add("Integer");
-        basicType.add("Long");
-        basicType.add("Float");
-        basicType.add("Double");
-        basicType.add("String");
-        basicType.add("Date");
-        basicType.add("BigDecimal");
-        basicType.add("Map");
-        basicType.add("HashMap");
+        BasicType.add("int");
+        BasicType.add("boolean");
+        BasicType.add("byte");
+        BasicType.add("short");
+        BasicType.add("long");
+        BasicType.add("float");
+        BasicType.add("double");
+        BasicType.add("char");
+        BasicType.add("Boolean");
+        BasicType.add("Byte");
+        BasicType.add("Short");
+        BasicType.add("Integer");
+        BasicType.add("Long");
+        BasicType.add("Float");
+        BasicType.add("Double");
+        BasicType.add("String");
+        BasicType.add("Date");
+        BasicType.add("BigDecimal");
+        BasicType.add("Map");
+        BasicType.add("HashMap");
 
         RequestMappings.add(RequestMapping);
         RequestMappings.add(GetMapping);
@@ -82,6 +83,16 @@ public class HttpzConstants {
         RequestMappings.add(PutMapping);
         RequestMappings.add(DeleteMapping);
         RequestMappings.add(PatchMapping);
+
+        RequestMethods.add("GET");
+        RequestMethods.add("POST");
+        RequestMethods.add("PUT");
+        RequestMethods.add("PATCH");
+        RequestMethods.add("DELETE");
+    }
+
+    public boolean validateMethod(String method) {
+        return RequestMethods.stream().map((v) -> v.equalsIgnoreCase(method)).limit(1).count() > 0;
     }
 
 }

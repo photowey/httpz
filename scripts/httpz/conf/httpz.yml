@@ -1,0 +1,28 @@
+httpz:
+  context:
+    "USERNAME": "photowey"
+  request:
+    - profile: "httpbinpost"
+      env: "dev"
+      url: "https://httpbin.org/post"
+      method: "POST"
+      parameters:
+        hello: "world"
+      headers:
+        content-type: "application/json"
+        accept: "*/*"
+      body:
+        username: "${USERNAME}"
+        password: "${PASSWORD}"
+        addr:
+          country: "cn"
+          province: "cq"
+    - profile: "httpbinget"
+      env: "dev"
+      url: "https://httpbin.org/get"
+      method: "GET"
+      parameters:
+        hello: "world"
+      headers:
+        content-type: "application/json"
+        accept: "*/*"
